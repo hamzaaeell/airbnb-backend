@@ -164,11 +164,11 @@ jobs:
           systemctl enable nginx
           EOF
 
-          sed -i "s/ECR_REPOSITORY_VALUE/${{ env.ECR_REPOSITORY }}/g" user-data.sh
-          sed -i "s/RDS_ENDPOINT_VALUE/${{ secrets.RDS_ENDPOINT }}/g" user-data.sh
-          sed -i "s/SECRET_ID_PREFIX_VALUE/${{ env.SECRET_ID_PREFIX }}/g" user-data.sh
-          sed -i "s/ENVIRONMENT_VALUE/${{ env.ENVIRONMENT }}/g" user-data.sh
-          sed -i "s/ALLOWED_HOSTS_VALUE/${{ env.ALLOWED_HOSTS }}/g" user-data.sh
+          sed -i "s|ECR_REPOSITORY_VALUE|${{ env.ECR_REPOSITORY }}|g" user-data.sh
+          sed -i "s|RDS_ENDPOINT_VALUE|${{ secrets.RDS_ENDPOINT }}|g" user-data.sh
+          sed -i "s|SECRET_ID_PREFIX_VALUE|${{ env.SECRET_ID_PREFIX }}|g" user-data.sh
+          sed -i "s|ENVIRONMENT_VALUE|${{ env.ENVIRONMENT }}|g" user-data.sh
+          sed -i "s|ALLOWED_HOSTS_VALUE|${{ env.ALLOWED_HOSTS }}|g" user-data.sh
 
           USER_DATA=$(base64 -w 0 user-data.sh)
           echo "USER_DATA=$USER_DATA" >> $GITHUB_ENV
