@@ -1,0 +1,19 @@
+djangobnb_backend/env
+# OS
+.DS_Store
+
+# Env files (sensitive)
+.env
+.env.dev
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# Docker
+*.pid
