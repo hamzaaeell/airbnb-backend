@@ -67,16 +67,20 @@ jobs:
 
       - name: Collect static files
         run: |
+          # Extract just the hostname from RDS_ENDPOINT (remove port)
+          RDS_HOSTNAME=$(echo "${{ secrets.RDS_ENDPOINT }}" | cut -d':' -f1)
+          
           docker run --rm \
             -e SECRET_KEY="${{ env.DJANGO_SECRET_KEY }}" \
             -e DJANGO_DEBUG="${{ env.DJANGO_DEBUG }}" \
             -e SQL_ENGINE="django.db.backends.postgresql" \
             -e SQL_DATABASE="djangobnb" \
             -e SQL_USER="djangobnb" \
-            -e SQL_HOST="${{ secrets.RDS_ENDPOINT }}" \
+            -e SQL_HOST="$RDS_HOSTNAME" \
             -e SQL_PORT="5432" \
+            -e STATIC_ROOT="/app/staticfiles" \
             ${{ env.IMAGE_URI }} \
-            python manage.py collectstatic --noinput || exit 1
+            python manage.py collectstatic --noinput --verbosity=2 || exit 1
 
       - name: Prepare user-data script
         run: |
