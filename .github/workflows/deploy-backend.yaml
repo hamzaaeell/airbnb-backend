@@ -27,15 +27,10 @@ jobs:
 
       - name: Set environment-specific variables
         run: |
-          if [ "${{ env.ENVIRONMENT }}" = "prod" ]; then
-            echo "SECRET_ID_PREFIX=djangobnb/prod" >> $GITHUB_ENV
-            echo "DJANGO_DEBUG=false" >> $GITHUB_ENV
-            echo "ALLOWED_HOSTS=prod-djangobnb-alb.us-east-1.elb.amazonaws.com" >> $GITHUB_ENV
-          else
-            echo "SECRET_ID_PREFIX=djangobnb/dev" >> $GITHUB_ENV
-            echo "DJANGO_DEBUG=true" >> $GITHUB_ENV
-            echo "ALLOWED_HOSTS=dev-djangobnb-alb-720056700.us-east-1.elb.amazonaws.com,localhost,127.0.0.1" >> $GITHUB_ENV
-          fi
+          # Temporarily using dev secrets for testing
+          echo "SECRET_ID_PREFIX=djangobnb/dev" >> $GITHUB_ENV
+          echo "DJANGO_DEBUG=true" >> $GITHUB_ENV
+          echo "ALLOWED_HOSTS=dev-djangobnb-alb-720056700.us-east-1.elb.amazonaws.com,localhost,127.0.0.1" >> $GITHUB_ENV
 
       - name: Login to Amazon ECR
         id: login-ecr

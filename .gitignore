@@ -17,3 +17,11 @@ __pycache__/
 
 # Docker
 *.pid
+
+
+
+# Virtual environments
+venv/
+.venv/
+djangobnb_backend/venv/
+
