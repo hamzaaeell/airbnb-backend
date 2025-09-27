@@ -56,7 +56,7 @@ jobs:
           IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
 
           echo "Building Docker image: $IMAGE_URI"
-          docker build -t $IMAGE_URI . || exit 1
+          docker build -t $IMAGE_URI ./djangobnb_backend || exit 1
           docker push $IMAGE_URI || exit 1
 
           # Also push commit SHA for rollback capability
